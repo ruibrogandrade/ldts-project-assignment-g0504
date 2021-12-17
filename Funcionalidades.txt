@@ -15,3 +15,12 @@ saida do jogo a meio
 se o jogador quiser pode ser ele próprio a meter navios
 print do tabuleiro do próprio jogador enquanto jogo continua
 print do tabuleiro do adversário no final do jogo
+vários tipos de navios
+
+tower defense
+acertar em powerups
+save game
+modo de jogo ilimitado
+tamanho de tabuleiro variável
+leaderboards
+jogador criar nível
