@@ -3,8 +3,10 @@ Criação de Tabuleiro com tamanho configurável
 Número de navios configurável
 criação de navios
 níveis de dificuldade com o computador
-ver se os navios cabem no tabuleiro
+ver se os navios cabem no tabuleiro/não dão overlap
 coinflip para ver quem é que começa
 destruição de navios
 diálogo com o jogador
 detetar se o tiro acertou ou não
+testes
+inputs inválidos
