@@ -10,3 +10,8 @@ diálogo com o jogador
 detetar se o tiro acertou ou não
 testes
 inputs inválidos
+controlar tries/quando se acerta no navio não se perde a try
+saida do jogo a meio
+se o jogador quiser pode ser ele próprio a meter navios
+print do tabuleiro do próprio jogador enquanto jogo continua
+print do tabuleiro do adversário no final do jogo
