@@ -1,0 +1,5 @@
+Aim/shoot with W A S D or Arrows
+Use P to pause the game
+ESC to end the game
+
+Have fun
