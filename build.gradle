@@ -1,12 +1,6 @@
 plugins {
     id 'java'
-    id 'application'
 }
-
-application {
-    mainClass.set("Application")
-}
-
 
 group 'org.example'
 version '1.0-SNAPSHOT'
