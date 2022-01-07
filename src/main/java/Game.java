@@ -9,9 +9,8 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
-
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Game {
     public Game() {
@@ -30,7 +29,7 @@ public class Game {
         }
     }
 
-    public void draw(int pos) throws IOException{
+    public void drawMenu(int pos) throws IOException{
         screen.clear();
         TextGraphics tg = screen.newTextGraphics();
         switch (pos) {
@@ -55,6 +54,32 @@ public class Game {
         screen.refresh();
     }
 
+    public void drawLevels() throws IOException, InterruptedException {
+        screen.clear();
+        TextGraphics tg = screen.newTextGraphics();
+        tg.setBackgroundColor(TextColor.ANSI.BLUE);
+        tg.fill(' ');
+        tg.setForegroundColor(TextColor.ANSI.RED_BRIGHT);
+        tg.putString(22, 2, "Levels");
+        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+        tg.putString(2, 8, "Level 1");
+        tg.putString(2, 11, "Level 2");
+        tg.putString(2, 14, "Level 3");
+        tg.putString(2, 17, "Level 4");
+        tg.putString(2, 20, "Level 5");
+        tg.putString(30, 8, "Level 6");
+        tg.putString(30, 11, "Level 7");
+        tg.putString(30, 14, "Level 8");
+        tg.putString(30, 17, "Level 9");
+        tg.putString(30, 20, "Level 10");
+        screen.refresh();
+        chooseLevel();
+    }
+
+    public void chooseLevel() {
+        
+    }
+
     public void readFile() throws IOException {
         try {
             screen.clear();
@@ -63,6 +88,8 @@ public class Game {
 
             int row = 10;
 
+
+
             File myObj = new File("instructions.txt");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
@@ -70,6 +97,7 @@ public class Game {
                 tg.putString(5, row, data);
                 row++;
             }
+            tg.putString(2,24, "Press ArrowUp to return to Menu");
             screen.refresh();
             myReader.close();
         } catch (FileNotFoundException e) {
@@ -80,7 +108,7 @@ public class Game {
 
     public void run() {
         try {
-            draw(1);
+            drawMenu(1);
             boolean keepRunning = true;
             int pos = 1;
             while(keepRunning) {
@@ -97,37 +125,43 @@ public class Game {
                         break;
                     case ArrowDown:
                         if (pos == 1) {
-                            draw(2);
+                            drawMenu(2);
                             pos = 2;
                             break;
                         }
                         else if (pos == 2) {
-                            draw(3);
+                            drawMenu(3);
                             pos = 3;
                             break;
                         }
                     case ArrowUp:
                         if (pos == 2) {
-                            draw(1);
+                            drawMenu(1);
                             pos = 1;
                             break;
                         }
                         else if (pos == 3) {
-                            draw(2);
+                            drawMenu(2);
                             pos = 2;
                             break;
                         }
                     case Enter:
                         if (pos == 1) {
-
+                            drawLevels();
+                            break;
                         }
                         else if (pos == 2) {
                             readFile();
+                            break;
+                        }
+                        else if (pos == 3) {
+                            screen.close();
+                            break;
                         }
                 }
             }
         }
-        catch (IOException e) {
+        catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
     }
