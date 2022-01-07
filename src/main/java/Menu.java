@@ -1,5 +1,8 @@
+import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.input.EscapeSequenceCharacterPattern;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
@@ -10,7 +13,8 @@ import com.googlecode.lanterna.terminal.Terminal;
 import java.io.IOException;
 
 public class Menu {
-    public void Game() {
+    /*
+    public Menu() throws IOException {
         try {
             TerminalSize terminalSize = new TerminalSize(50, 25);
             DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
@@ -24,29 +28,64 @@ public class Menu {
         catch (IOException e) {
             e.printStackTrace();
         }
-    }
 
-    private void draw() throws IOException{
-        TextGraphics tg = screen.newTextGraphics();
-        tg.putString(20, 7, "1)Play");
-        tg.putString(20,12,"2)Rules");
-        tg.putString(20,17,"3)Exit");
+        draw();
+    }
+    */
+
+    public void draw(TextGraphics tg, int pos) throws IOException{
+        tg.setBackgroundColor(TextColor.Factory.fromString("#336699"));
         screen.clear();
+        switch (pos) {
+            case 1:
+                tg.putString(20, 7, "1)Play");
+                tg.putString(20,12,"2)Rules", SGR.BLINK);
+                tg.putString(20,17,"3)Exit");
+            case 2:
+                tg.putString(20, 7, "1)Play");
+                tg.putString(20,12,"2)Rules");
+                tg.putString(20,17,"3)Exit", SGR.BLINK);
+            default:
+                break;
+
+        }
         screen.refresh();
     }
 
-    private void run() {
+    public void run() {
         try {
-            while(true) {
-                draw();
-                com.googlecode.lanterna.input.KeyStroke key = screen.readInput();
-                processKey(key);
+            boolean keepRunning = true;
+            while(keepRunning) {
+                int pos = 1;
+                //draw();
+                KeyStroke key = screen.readInput();
 
-                if (key.getKeyType() == KeyType.Character && key.getCharacter() == ('q'))
-                    screen.close();
-                if (key.getKeyType() == KeyType.EOF)
-                    break;
+                switch (key.getKeyType()) {
+                    case Escape:
+                        keepRunning = false;
+                        screen.close();
+                    case EOF:
+                        keepRunning = false;
+                        break;
+                    case ArrowDown:
+                        if (pos == 1) {
+                            screen.clear();
+                            TextGraphics tg = screen.newTextGraphics();
+                            tg.putString(20, 7, "1)Play");
+                            tg.putString(20,12,"2)Rules",SGR.BLINK);
+                            tg.putString(20,17,"3)Exit");
+                            pos = 2;
+                        }
+                        else if (pos == 2) {
+                            screen.clear();
+                            TextGraphics tg = screen.newTextGraphics();
+                            tg.putString(20, 7, "1)Play");
+                            tg.putString(20,12,"2)Rules");
+                            tg.putString(20,17,"3)Exit", SGR.BLINK);
+                            pos = 2;
+                        }
 
+                }
             }
         } catch (IOException e){
             e.printStackTrace();
