@@ -1,23 +1,16 @@
-import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.graphics.TextGraphics;
-import com.googlecode.lanterna.gui2.Button.DefaultButtonRenderer;
-import com.googlecode.lanterna.gui2.TextGUIGraphics;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
-import org.w3c.dom.Text;
 
-import java.awt.*;
 import java.io.IOException;
 
-public class menu {
+public class Game {
 
-    public static void main(String[] args) {
-       menu();
-    }
-    public static void menu() {
+
+    public void Game() {
         try {
             TerminalSize terminalSize = new TerminalSize(50, 25);
             DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
@@ -40,4 +33,6 @@ public class menu {
             e.printStackTrace();
         }
     }
+
+
 }
