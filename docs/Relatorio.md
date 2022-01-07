@@ -50,8 +50,13 @@ Figura 2: Lógica de jogo em modo infinito
 ## 3. Como jogar
 
 **1.** 
+
 **2.**
+
 **3.**
+
 **4.**
+
 **5.**
+
 
