@@ -3,10 +3,13 @@ import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
+import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+import org.w3c.dom.Text;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -54,6 +57,15 @@ public class Game {
         screen.refresh();
     }
 
+    public void drawCustomGame() throws IOException {
+        screen.clear();
+        TextGraphics tg = screen.newTextGraphics();
+        tg.setForegroundColor(TextColor.ANSI.RED_BRIGHT);
+        tg.putString(20, 2, "Custom Game");
+        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+        screen.refresh();
+    }
+
     public void drawLevels() throws IOException, InterruptedException {
         screen.clear();
         TextGraphics tg = screen.newTextGraphics();
@@ -62,7 +74,7 @@ public class Game {
         tg.setForegroundColor(TextColor.ANSI.RED_BRIGHT);
         tg.putString(22, 2, "Levels");
         tg.setForegroundColor(TextColor.ANSI.DEFAULT);
-        tg.putString(2, 8, "Level 1");
+        tg.putString(2, 8, "Level 1", SGR.BOLD);
         tg.putString(2, 11, "Level 2");
         tg.putString(2, 14, "Level 3");
         tg.putString(2, 17, "Level 4");
@@ -71,13 +83,38 @@ public class Game {
         tg.putString(30, 11, "Level 7");
         tg.putString(30, 14, "Level 8");
         tg.putString(30, 17, "Level 9");
-        tg.putString(30, 20, "Level 10");
+        tg.putString(30, 20, "Custom Game");
         screen.refresh();
         chooseLevel();
     }
 
-    public void chooseLevel() {
-        
+    public void chooseLevel() throws IOException {
+        int pos = 1;
+        boolean keepRunning = true;
+        while (keepRunning) {
+            KeyStroke key = screen.readInput();
+
+            switch (key.getKeyType()) {
+                case Escape:
+                    keepRunning = false;
+                    screen.close();
+                    System.out.println("Ended Game");
+                    break;
+                case EOF:
+                    keepRunning = false;
+                    break;
+                case Character:
+                    if (key.getCharacter() == ('b')) {
+                        keepRunning = false;
+                        break;
+                    }
+                    else if (key.getCharacter() == ('c')) {
+                        keepRunning = false;
+                        drawCustomGame();
+                        break;
+                    }
+            }
+        }
     }
 
     public void readFile() throws IOException {
@@ -85,10 +122,7 @@ public class Game {
             screen.clear();
             TextGraphics tg = screen.newTextGraphics();
             tg.putString(20, 5, "Instructions:");
-
             int row = 10;
-
-
 
             File myObj = new File("instructions.txt");
             Scanner myReader = new Scanner(myObj);
