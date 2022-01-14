@@ -40,8 +40,9 @@ public class Isle {
         screen.enableModifiers(SGR.BOLD);
         int columns = corners.get(2) - corners.get(0) + 1;
         int rows = corners.get(1) - corners.get(3) + 1;
-        screen.fillRectangle(new TerminalPosition(corners.get(0),corners.get(3)), new TerminalSize(columns, rows), '=');
-        //screen.putString(new TerminalPosition(getX(), getY()), "/");
+        screen.setBackgroundColor(TextColor.ANSI.RED_BRIGHT);
+        screen.fillRectangle(new TerminalPosition(corners.get(0),corners.get(3)), new TerminalSize(columns, rows), ' ');
+        screen.setBackgroundColor(TextColor.ANSI.DEFAULT);
     }
 
     public List<Integer> find_corners(List<Isle> isles) {
