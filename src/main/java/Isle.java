@@ -4,10 +4,16 @@ import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Isle {
 
     private int x;
     private int y;
+
+    public Isle() {}
 
     public Isle(int x, int y) {
         this.x = x;
@@ -30,10 +36,39 @@ public class Isle {
         this.y = y;
     }
 
-    public void draw(TextGraphics screen) {
+    public void draw(TextGraphics screen, List<Integer> corners) {
         screen.enableModifiers(SGR.BOLD);
-        screen.fillRectangle(new TerminalPosition(0,0), new TerminalSize(width, height), ' ');
+        int columns = corners.get(2) - corners.get(0) + 1;
+        int rows = corners.get(1) - corners.get(3) + 1;
+        //screen.fillRectangle(new TerminalPosition(corners.get(0),corners.get(1)), new TerminalSize(corners.get(2), corners.get(3)), '=');
+        screen.fillRectangle(new TerminalPosition(1,11), new TerminalSize(columns, rows), '=');
         //screen.putString(new TerminalPosition(getX(), getY()), "/");
     }
 
+    public List<Integer> find_corners(List<Isle> isles) {
+        Integer x1 = 0;
+        Integer y1 = 0;
+        Integer x2 = 0;
+        Integer y2 = 0;
+        //Bottom Left Corner
+        for(int i = 0; i < isles.size(); i++) {
+            if (i == 0) {
+                x1 = isles.get(i).getX();
+                y1 = isles.get(i).getY();
+            }
+            if (isles.get(i).getX() < x1) x1 = isles.get(i).getX();
+            if (isles.get(i).getY() > y1) y1 = isles.get(i).getY();
+        }
+        //Top Right Corner
+        for(int i = 0; i < isles.size(); i++) {
+            if (i == 0) {
+                x2 = isles.get(i).getX();
+                y2 = isles.get(i).getY();
+            }
+            if (isles.get(i).getX() > x2) x2 = isles.get(i).getX();
+            if (isles.get(i).getY() < y2) y2 = isles.get(i).getY();
+        }
+        List<Integer> result = Arrays.asList(x1,y1,x2,y2);
+        return result;
+    }
 }
