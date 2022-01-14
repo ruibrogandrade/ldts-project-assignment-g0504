@@ -40,8 +40,7 @@ public class Isle {
         screen.enableModifiers(SGR.BOLD);
         int columns = corners.get(2) - corners.get(0) + 1;
         int rows = corners.get(1) - corners.get(3) + 1;
-        //screen.fillRectangle(new TerminalPosition(corners.get(0),corners.get(1)), new TerminalSize(corners.get(2), corners.get(3)), '=');
-        screen.fillRectangle(new TerminalPosition(1,11), new TerminalSize(columns, rows), '=');
+        screen.fillRectangle(new TerminalPosition(corners.get(0),corners.get(3)), new TerminalSize(columns, rows), '=');
         //screen.putString(new TerminalPosition(getX(), getY()), "/");
     }
 
