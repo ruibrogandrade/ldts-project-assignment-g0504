@@ -9,7 +9,7 @@ public class Game {
 
     Arena arena = new Arena(70,35);
 
-    public void run(Screen screen) throws IOException {
+    public void run(Screen screen) {
         try {
             while(true) {
                 arena.draw(screen);
@@ -26,8 +26,6 @@ public class Game {
 
                 if (key.getKeyType() == KeyType.Character && key.getCharacter() == ('q'))
                     screen.close();
-                if (key.getKeyType() == KeyType.EOF)
-                    break;
 
                 arena.moveMonsters();
                 if(arena.verifyMonsterCollisions()){
