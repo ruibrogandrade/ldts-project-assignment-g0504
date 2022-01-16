@@ -130,7 +130,7 @@ public class Menu {
     }
 
     public void chooseLevel(int pos) throws IOException, InterruptedException {
-        Arena arena = new Arena(70,35);
+        Game game = new Game();
         boolean keepRunning = true;
         while (keepRunning) {
             KeyStroke key = screen.readInput();
@@ -181,7 +181,7 @@ public class Menu {
                     }
                 case Enter:
                     keepRunning = false;
-                    arena.draw(screen);
+                    game.run(screen);
                     break;
             }
         }

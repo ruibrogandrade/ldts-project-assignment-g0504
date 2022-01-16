@@ -1,22 +1,54 @@
-import com.googlecode.lanterna.SGR;
-import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.TextColor;
-import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
-import com.googlecode.lanterna.screen.TerminalScreen;
-import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-import com.googlecode.lanterna.terminal.Terminal;
-import org.w3c.dom.Text;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Game {
-    public Game() {
+    public Game() {}
 
+    Arena arena = new Arena(70,35);
+
+    public void run(Screen screen) throws IOException {
+        try {
+            while(true) {
+                arena.draw(screen);
+                com.googlecode.lanterna.input.KeyStroke key = screen.readInput();
+                processKey(key);
+
+                if (key.getKeyType() == KeyType.EOF)
+                    break;
+                /*
+                if(arena.verifyMonsterCollisions()){
+                    screen.close();
+                    break;
+                }
+
+                if (key.getKeyType() == KeyType.Character && key.getCharacter() == ('q'))
+                    screen.close();
+                if (key.getKeyType() == KeyType.EOF)
+                    break;
+
+                arena.moveMonsters();
+                if(arena.verifyMonsterCollisions()){
+                    screen.close();
+                    break;
+                }
+                 */
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+
+    private void processKey(com.googlecode.lanterna.input.KeyStroke key){
+        System.out.println(key);
+        switch (key.getKeyType()) {
+            case ArrowUp    -> arena.hitmarkerMoveUp();
+            case ArrowDown  -> arena.hitmarkerMoveDown();
+            case ArrowLeft  -> arena.hitmarkerMoveLeft();
+            case ArrowRight -> arena.hitmarkerMoveRight();
+        }
     }
 }

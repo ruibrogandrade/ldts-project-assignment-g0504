@@ -50,6 +50,7 @@ public class Player {
         Integer finaly = inty;
         double check = Math.random();
         List<Integer> result = new ArrayList<>();
+        /*
         if (intx - x != 0) {
             if (check >= 0.5) finalx = intx;
             else finalx = intx - 1;
@@ -58,6 +59,7 @@ public class Player {
             if (check >= 0.5) finaly = inty;
             else finaly = inty - 1;
         }
+         */
         result.add(finalx);
         result.add(finaly);
         return result;

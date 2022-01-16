@@ -22,7 +22,7 @@ public class Arena {
     }
 
     //VIEW
-
+    Hitmarker hitmarker = new Hitmarker(0,0);
     //public arena (Arena arena, TerminalScreen screen){
     //this.screen = screen;
     //this.arena = arena; }
@@ -49,6 +49,7 @@ public class Arena {
         Player player = new Player();
         player.draw(tg,corners);
 
+        hitmarker.draw(tg);
 
         screen.refresh();
     }
@@ -89,6 +90,21 @@ public class Arena {
         return isles;
     }
 
+    public void hitmarkerMoveUp() {
+        hitmarker.setY(hitmarker.getY() - 1);
+    }
+
+    public void hitmarkerMoveDown() {
+        hitmarker.setY(hitmarker.getY() + 1);
+    }
+
+    public void hitmarkerMoveLeft() {
+        hitmarker.setX(hitmarker.getX() - 1);
+    }
+
+    public void hitmarkerMoveRight() {
+        hitmarker.setX(hitmarker.getX() + 1);
+    }
 
 
     private List<Border> borders;
