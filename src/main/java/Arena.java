@@ -40,10 +40,13 @@ public class Arena {
         for(Border border : borders)
             border.draw(tg);
 
+        for(Isle isles : isles)
+            isles.draw(tg);
 
         Isle isle = new Isle();
         List<Integer> corners = isle.find_corners(isles);
-        isle.draw(tg,corners);
+        //isle.draw(tg,corners);
+
         screen.refresh();
     }
 

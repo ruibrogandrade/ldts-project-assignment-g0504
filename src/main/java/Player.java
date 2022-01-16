@@ -33,9 +33,7 @@ public class Player {
 
     public void draw(TextGraphics screen, List<Integer> corners) {
         screen.enableModifiers(SGR.BOLD);
-        Float x = Float.valueOf((corners.get(3) - corners.get(0)) / 2);
-        Float y = Float.valueOf((corners.get(1) - corners.get(1)) / 2);
-        if (x == )
+
         screen.putString(new TerminalPosition(getX(), getY()), "#");
     }
 }

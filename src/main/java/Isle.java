@@ -36,12 +36,12 @@ public class Isle {
         this.y = y;
     }
 
-    public void draw(TextGraphics screen, List<Integer> corners) {
-        screen.enableModifiers(SGR.BOLD);
-        int columns = corners.get(2) - corners.get(0) + 1;
-        int rows = corners.get(1) - corners.get(3) + 1;
+    public void draw(TextGraphics screen) {
+        //int columns = corners.get(2) - corners.get(0) + 1;
+        //int rows = corners.get(1) - corners.get(3) + 1;
         screen.setBackgroundColor(TextColor.ANSI.RED_BRIGHT);
-        screen.fillRectangle(new TerminalPosition(corners.get(0),corners.get(3)), new TerminalSize(columns, rows), ' ');
+        screen.putString(new TerminalPosition(getX(), getY()), " ");
+        //screen.fillRectangle(new TerminalPosition(corners.get(0),corners.get(3)), new TerminalSize(columns, rows), ' ');
         screen.setBackgroundColor(TextColor.ANSI.DEFAULT);
     }
 
