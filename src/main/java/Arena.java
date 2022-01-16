@@ -82,6 +82,9 @@ public class Arena {
         isles.add(new Isle(12,10));
         isles.add(new Isle(12,11));
         isles.add(new Isle(12,12));
+        isles.add(new Isle(13,10));
+        isles.add(new Isle(13,11));
+        isles.add(new Isle(13,12));
 
         return isles;
     }

@@ -42,21 +42,21 @@ public class Player {
     }
 
     public List<Integer> find_center(List<Integer> corners) {
-        Float x = (float) (corners.get(0) + ((corners.get(2) - corners.get(0)) / 2));
-        Float y = (float) (corners.get(3) + ((corners.get(1) - corners.get(0)) / 2));
+        Float x = (corners.get(0) + (((float)corners.get(2) - corners.get(0)) / 2));
+        Float y = (corners.get(3) + (((float)corners.get(1) - corners.get(0)) / 2));
         Integer intx = Math.round(x);
         Integer inty = Math.round(y);
         Integer finalx = intx;
         Integer finaly = inty;
-        Integer check;
+        double check = Math.random();
         List<Integer> result = new ArrayList<>();
         if (intx - x != 0) {
-            if (Math.random() == 1) finalx = intx;
-            if (Math.random() == 0) finalx = intx - 1;
+            if (check >= 0.5) finalx = intx;
+            else finalx = intx - 1;
         }
         if (inty - y != 0) {
-            if (Math.random() == 1) finaly = inty;
-            if (Math.random() == 0) finaly = inty - 1;
+            if (check >= 0.5) finaly = inty;
+            else finaly = inty - 1;
         }
         result.add(finalx);
         result.add(finaly);
