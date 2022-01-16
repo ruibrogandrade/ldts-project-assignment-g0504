@@ -9,15 +9,15 @@ public class PlayerTest {
 
     @Test
     public void find_center() {
-        List<Isle> testIsles = new ArrayList<>();
-        testIsles.add(new Isle(1,32));
-        testIsles.add(new Isle(1,33));
-        testIsles.add(new Isle(2,32));
-        testIsles.add(new Isle(2,33));
+        List<Integer> testCorners = new ArrayList<>();
+        testCorners.add(10);
+        testCorners.add(12);
+        testCorners.add(12);
+        testCorners.add(10);
 
         Player player = new Player();
-        List<Integer> testResult = player.find_center(testIsles);
-        List<Integer> correctResult = Arrays.asList(10,20);
+        List<Integer> testResult = player.find_center(testCorners);
+        List<Integer> correctResult = Arrays.asList(11,11);
 
         Assertions.assertEquals(correctResult, testResult);
     }

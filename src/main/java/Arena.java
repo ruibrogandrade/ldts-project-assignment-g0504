@@ -45,7 +45,10 @@ public class Arena {
 
         Isle isle = new Isle();
         List<Integer> corners = isle.find_corners(isles);
-        //isle.draw(tg,corners);
+
+        Player player = new Player();
+        player.draw(tg,corners);
+
 
         screen.refresh();
     }
@@ -70,10 +73,15 @@ public class Arena {
         List<Isle> isles = new ArrayList<>();
         //isles.add(new Isle(20,20));
         //isles.add(new Isle(10,10));
-        isles.add(new Isle(1,10));
-        isles.add(new Isle(1,11));
-        isles.add(new Isle(2,10));
-        isles.add(new Isle(2,11));
+        isles.add(new Isle(10,10));
+        isles.add(new Isle(10,11));
+        isles.add(new Isle(10,12));
+        isles.add(new Isle(11,10));
+        isles.add(new Isle(11,11));
+        isles.add(new Isle(11,12));
+        isles.add(new Isle(12,10));
+        isles.add(new Isle(12,11));
+        isles.add(new Isle(12,12));
 
         return isles;
     }
