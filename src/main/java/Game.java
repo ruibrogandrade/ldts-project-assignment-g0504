@@ -2,45 +2,22 @@ import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class Game {
-    public Game() {}
-
-    Arena arena = new Arena(70,35);
-
-    public void run(Screen screen) {
-        try {
-            while(true) {
-                arena.draw(screen);
-                com.googlecode.lanterna.input.KeyStroke key = screen.readInput();
-                processKey(key);
-
-                if (key.getKeyType() == KeyType.EOF)
-                    break;
-                /*
-                if(arena.verifyMonsterCollisions()){
-                    screen.close();
-                    break;
-                }
-
-                if (key.getKeyType() == KeyType.Character && key.getCharacter() == ('q'))
-                    screen.close();
-
-                arena.moveMonsters();
-                if(arena.verifyMonsterCollisions()){
-                    screen.close();
-                    break;
-                }
-                 */
-            }
-        } catch (IOException e){
-            e.printStackTrace();
-        }
+    public Game(Screen screen) {
+        this.screen = screen;
+        arena = Menu.arena;
     }
 
+    public void draw() throws IOException {
+        screen.clear();
+        arena.draw(screen);
+        screen.refresh();
+    }
 
-    private void processKey(com.googlecode.lanterna.input.KeyStroke key){
+    private void processKey(KeyStroke key){
         System.out.println(key);
         switch (key.getKeyType()) {
             case ArrowUp    -> arena.hitmarkerMoveUp();
@@ -49,4 +26,53 @@ public class Game {
             case ArrowRight -> arena.hitmarkerMoveRight();
         }
     }
+
+    private void moveShips() {
+        for (Ship ship : arena.getShips()) {
+            if (Player.getX() < ship.getX()) {
+                arena.shipMoveLeft(ship);
+            }
+            else if (Player.getX() > ship.getX()) {
+                arena.shipMoveRight(ship);
+            }
+            else if (Player.getY() < ship.getY()) {
+                arena.shipMoveUp(ship);
+            }
+            else if (Player.getY() > ship.getY()) {
+                arena.shipMoveDown(ship);
+            }
+        }
+    }
+
+    public void run() {
+        try {
+            while(true) {
+                draw();
+                KeyStroke key = screen.readInput();
+                processKey(key);
+
+                if (key.getKeyType() == KeyType.Escape) {
+                    screen.close();
+                    break;
+                }
+                else if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'b') {
+                    Menu menu = new Menu();
+                    screen.close();
+                    menu.run();
+                    break;
+                }
+                else if (key.getKeyType() == KeyType.Enter) {
+                    moveShips();
+                }
+                if (key.getKeyType() == KeyType.EOF)
+                    break;
+            }
+        } catch (IOException | FontFormatException e){
+            e.printStackTrace();
+        }
+
+    }
+
+    private Screen screen;
+    private Arena arena;
 }

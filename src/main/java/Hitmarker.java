@@ -1,15 +1,10 @@
 import com.googlecode.lanterna.SGR;
-import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
-
-import java.util.List;
 
 public class Hitmarker {
     private int x;
     private int y;
-
-    public Hitmarker() {}
 
     public Hitmarker(int x, int y) {
         this.x = x;
@@ -33,9 +28,11 @@ public class Hitmarker {
     }
 
     public void draw(TextGraphics screen) {
-        screen.setBackgroundColor(TextColor.ANSI.GREEN);
-        screen.putString(getX(),getY(), ("_"), SGR.BLINK);
+        screen.setBackgroundColor(TextColor.Factory.fromString("#336699"));
+        screen.setForegroundColor(TextColor.ANSI.BLACK);
+        screen.putString(getX(),getY(), ("X"), SGR.BLINK);
         screen.setBackgroundColor(TextColor.ANSI.DEFAULT);
+        screen.setForegroundColor(TextColor.ANSI.DEFAULT);
     }
 
 }

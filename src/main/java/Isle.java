@@ -4,7 +4,6 @@ import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -37,19 +36,16 @@ public class Isle {
     }
 
     public void draw(TextGraphics screen) {
-        //int columns = corners.get(2) - corners.get(0) + 1;
-        //int rows = corners.get(1) - corners.get(3) + 1;
         screen.setBackgroundColor(TextColor.ANSI.RED_BRIGHT);
         screen.putString(new TerminalPosition(getX(), getY()), " ");
-        //screen.fillRectangle(new TerminalPosition(corners.get(0),corners.get(3)), new TerminalSize(columns, rows), ' ');
         screen.setBackgroundColor(TextColor.ANSI.DEFAULT);
     }
 
     public List<Integer> find_corners(List<Isle> isles) {
-        Integer x1 = 0;
-        Integer y1 = 0;
-        Integer x2 = 0;
-        Integer y2 = 0;
+        int x1 = 0;
+        int y1 = 0;
+        int x2 = 0;
+        int y2 = 0;
         //Bottom Left Corner
         for(int i = 0; i < isles.size(); i++) {
             if (i == 0) {

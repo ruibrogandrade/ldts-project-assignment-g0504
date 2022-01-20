@@ -7,7 +7,7 @@ class MenuTest extends Specification {
         setup:
         Robot robot = new Robot();
         def calls = 0
-        def filter = new Game();
+        def filter = new Menu();
         filter.run();
         robot.keyPress(KeyEvent.ENTER);
         robot.keyRelease(KeyEvent.ENTER);

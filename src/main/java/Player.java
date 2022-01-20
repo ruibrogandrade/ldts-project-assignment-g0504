@@ -7,30 +7,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
-    private int x;
-    private int y;
+    private static int x;
+    private static int y;
 
     public Player() {}
 
     public Player(int x, int y) {
-        this.x = x;
-        this.y = y;
+        Player.x = x;
+        Player.y = y;
     }
 
-    public int getX() {
+    public static int getX() {
         return x;
     }
 
-    public int getY() {
+    public static int getY() {
         return y;
     }
 
     public void setX(int x) {
-        this.x = x;
+        Player.x = x;
     }
 
     public void setY(int y) {
-        this.y = y;
+        Player.y = y;
     }
 
     public void draw(TextGraphics screen, List<Integer> corners) {
@@ -42,12 +42,12 @@ public class Player {
     }
 
     public List<Integer> find_center(List<Integer> corners) {
-        Float x = (corners.get(0) + (((float)corners.get(2) - corners.get(0)) / 2));
-        Float y = (corners.get(3) + (((float)corners.get(1) - corners.get(0)) / 2));
-        Integer intx = Math.round(x);
-        Integer inty = Math.round(y);
-        Integer finalx = intx;
-        Integer finaly = inty;
+        float x = (corners.get(0) + (((float)corners.get(2) - corners.get(0)) / 2));
+        float y = (corners.get(3) + (((float)corners.get(1) - corners.get(0)) / 2));
+        int intx = Math.round(x);
+        int inty = Math.round(y);
+        int finalx = intx;
+        int finaly = inty;
         double check = Math.random();
         List<Integer> result = new ArrayList<>();
         /*
@@ -62,6 +62,8 @@ public class Player {
          */
         result.add(finalx);
         result.add(finaly);
+        Player.x = finalx;
+        Player.y = finaly;
         return result;
     }
 }
