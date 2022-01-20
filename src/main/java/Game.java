@@ -4,6 +4,7 @@ import com.googlecode.lanterna.screen.Screen;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Game {
     public Game(Screen screen) {
@@ -44,6 +45,20 @@ public class Game {
         }
     }
 
+    private void shipHits() {
+        ArrayList<Ship> extra = new ArrayList<>();
+        for (Ship ship : arena.getShips()) {
+            if (arena.shipHits(ship))  {
+                if (ship.getSize() <= 1)
+                    extra.add(ship);
+                else ship.setSize(ship.getSize()-1);
+            }
+        }
+        for (Ship ship : extra) {
+            arena.getShips().remove(ship);
+        }
+    }
+
     public void run() {
         try {
             while(true) {
@@ -55,6 +70,11 @@ public class Game {
                     screen.close();
                     break;
                 }
+                if (arena.getShips().size() == 0) {
+                    screen.close();
+                    System.out.println("You won!");
+                    break;
+                }
                 else if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'b') {
                     Menu menu = new Menu();
                     screen.close();
@@ -62,6 +82,7 @@ public class Game {
                     break;
                 }
                 else if (key.getKeyType() == KeyType.Enter) {
+                    shipHits();
                     moveShips();
                 }
                 if (key.getKeyType() == KeyType.EOF)

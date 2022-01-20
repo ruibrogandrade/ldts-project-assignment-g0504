@@ -143,6 +143,15 @@ public class Arena {
         return ships;
     }
 
+    public boolean shipHits(Ship ship) {
+        for (int i = 0; i < ship.getCoord().size(); i += 2) {
+            if (ship.getCoord().get(i) == hitmarker.getX() && ship.getCoord().get(i+1) == hitmarker.getY()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public ArrayList<Ship> getShips() {
         return ships;
     }

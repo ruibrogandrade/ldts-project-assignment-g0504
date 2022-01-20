@@ -25,12 +25,35 @@ public class Ship {
         return true;
     }
 
+    public ArrayList<Integer> getCoord() {
+        ArrayList<Integer> shipCoord = new ArrayList<>();
+
+        if (Objects.equals(direction, "v")) {
+            for (int i = 0; i < size; i++) {
+                shipCoord.add(x);
+                shipCoord.add(y+i);
+            }
+        }
+        else if (Objects.equals(direction, "h")) {
+            for (int i = 0; i < size; i++) {
+                shipCoord.add(x+i);
+                shipCoord.add(y);
+            }
+        }
+
+        return shipCoord;
+    }
+
     public int getX() {
         return x;
     }
 
     public int getY() {
         return y;
+    }
+
+    public int getSize() {
+        return size;
     }
 
     public String getDirection() {
@@ -43,6 +66,10 @@ public class Ship {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
     }
 
     public void setDirection(String direction) {
