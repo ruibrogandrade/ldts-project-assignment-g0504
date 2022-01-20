@@ -67,6 +67,14 @@ public class Game {
         return false;
     }
 
+    private void verifyShipCollisions() {
+        if (arena.verifyShipCollisions().size() > 0) {
+            for (Ship ship : arena.verifyShipCollisions()) {
+                arena.getShips().remove(ship);
+            }
+        }
+    }
+
     public void run() {
         try {
             while(true) {
@@ -87,6 +95,7 @@ public class Game {
                 else if (key.getKeyType() == KeyType.Enter) {
                     shipHits();
                     moveShips();
+                    verifyShipCollisions();
                 }
                 else if (key.getKeyType() == KeyType.EOF)
                     break;

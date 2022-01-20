@@ -5,6 +5,7 @@ import com.googlecode.lanterna.screen.Screen;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Arena {
 
@@ -160,6 +161,23 @@ public class Arena {
             }
         }
         return false;
+    }
+
+    public ArrayList<Ship> verifyShipCollisions() {
+        ArrayList<Ship> extra = new ArrayList<>();
+        for (int i = 0; i < ships.size(); i++) {
+            for (int j = i+1; j < ships.size(); j++) {
+                for (int k = 0; k < ships.get(i).getCoord().size(); k += 2) {
+                    for (int l = 0; l < ships.get(j).getCoord().size(); l += 2) {
+                        if (Objects.equals(ships.get(i).getCoord().get(k), ships.get(j).getCoord().get(l)) && Objects.equals(ships.get(i).getCoord().get(k + 1), ships.get(j).getCoord().get(l + 1))) {
+                            extra.add(ships.get(i));
+                            extra.add(ships.get(j));
+                        }
+                    }
+                }
+            }
+        }
+        return extra;
     }
 
     public ArrayList<Ship> getShips() {
