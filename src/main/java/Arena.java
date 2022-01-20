@@ -152,8 +152,22 @@ public class Arena {
         return false;
     }
 
+    public boolean shipHitsIsle(Ship ship) {
+        for (int i = 0; i < ship.getCoord().size(); i += 2) {
+            for (Isle isle : isles) {
+                if (ship.getCoord().get(i) == isle.getX() && ship.getCoord().get(i+1) == isle.getY())
+                    return true;
+            }
+        }
+        return false;
+    }
+
     public ArrayList<Ship> getShips() {
         return ships;
+    }
+
+    public List<Isle> getIsles() {
+        return isles;
     }
 
     public static int getWidth() {

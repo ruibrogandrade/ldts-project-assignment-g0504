@@ -59,6 +59,14 @@ public class Game {
         }
     }
 
+    private boolean shipHitsIsle() {
+        for (Ship ship : arena.getShips()) {
+            if (arena.shipHitsIsle(ship))
+                return true;
+        }
+        return false;
+    }
+
     public void run() {
         try {
             while(true) {
@@ -68,11 +76,6 @@ public class Game {
 
                 if (key.getKeyType() == KeyType.Escape) {
                     screen.close();
-                    break;
-                }
-                if (arena.getShips().size() == 0) {
-                    screen.close();
-                    System.out.println("You won!");
                     break;
                 }
                 else if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'b') {
@@ -85,8 +88,18 @@ public class Game {
                     shipHits();
                     moveShips();
                 }
-                if (key.getKeyType() == KeyType.EOF)
+                else if (key.getKeyType() == KeyType.EOF)
                     break;
+                if (arena.getShips().size() == 0) {
+                    screen.close();
+                    System.out.println("You won!");
+                    break;
+                }
+                if (shipHitsIsle()) {
+                    screen.close();
+                    System.out.println("You lost, a ship reached the island");
+                    break;
+                }
             }
         } catch (IOException | FontFormatException e){
             e.printStackTrace();
