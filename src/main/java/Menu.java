@@ -49,7 +49,6 @@ public class Menu {
         screen.startScreen();             // screens must be started
         screen.doResizeIfNecessary();     // resize screen if necessary
 
-        arena = new Arena(70,35);
     }
 
     public void draw(int pos) throws IOException{
@@ -164,5 +163,4 @@ public class Menu {
     }
 
     private Screen screen;
-    public static Arena arena;
 }

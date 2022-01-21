@@ -8,7 +8,7 @@ import java.io.IOException;
 public class Game {
     public Game(Screen screen) {
         this.screen = screen;
-        arena = Menu.arena;
+        arena = Levels.arena;
     }
 
     public void draw() throws IOException {

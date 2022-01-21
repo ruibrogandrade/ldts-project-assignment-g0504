@@ -43,7 +43,7 @@ public class Player {
 
     public List<Integer> find_center(List<Integer> corners) {
         float x = (corners.get(0) + (((float)corners.get(2) - corners.get(0)) / 2));
-        float y = (corners.get(3) + (((float)corners.get(1) - corners.get(0)) / 2));
+        float y = (corners.get(3) + (((float)corners.get(1) - corners.get(3)) / 2));
         int intx = Math.round(x);
         int inty = Math.round(y);
         int finalx = intx;
