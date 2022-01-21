@@ -205,7 +205,7 @@ public class Arena {
         ArrayList<Ship> ships = new ArrayList<>();
 
         ships.add(new Ship(3, "v", 60, 30));
-        ships.add(new Ship(3, "v", 50, 33));
+        ships.add(new Ship(3, "v", 50, 25));
         ships.add(new Ship(4, "h", 55, 20));
 
         return ships;
@@ -255,7 +255,7 @@ public class Arena {
         ships.add(new Ship(5, "v", 50, 7));
         ships.add(new Ship(5, "h", 40, 5));
         ships.add(new Ship(5, "v", 24, 5));
-        ships.add(new Ship(5, "h", 35, 5));
+        ships.add(new Ship(5, "h", 50, 5));
 
         return ships;
     }
