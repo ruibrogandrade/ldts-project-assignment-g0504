@@ -83,37 +83,44 @@ public class Levels {
                     }
                     else if (key.getCharacter() == '1') {
                         pos = 1;
+                        lvl = 1;
                         drawLevelMenu(1);
                         break;
                     }
                     else if (key.getCharacter() == '2') {
                         pos = 2;
+                        lvl = 2;
                         drawLevelMenu(2);
                         break;
                     }
                     else if (key.getCharacter() == '3') {
                         pos = 3;
+                        lvl = 3;
                         drawLevelMenu(3);
                         break;
                     }
                     else if (key.getCharacter() == '4') {
                         pos = 4;
+                        lvl = 4;
                         drawLevelMenu(4);
                         break;
                     }
                     else if (key.getCharacter() == '5') {
                         pos = 5;
+                        lvl = 5;
                         drawLevelMenu(5);
                         break;
                     }
                 case Enter:
                     keepRunning = false;
+                    arena = new Arena(70,35,lvl);
                     Game game = new Game(screen);
                     game.run();
                     break;
             }
         }
     }
-
+    public static int lvl;
+    public static Arena arena;
     private final Screen screen;
 }
