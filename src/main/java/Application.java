@@ -15,9 +15,38 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+import View.Menu_View;
+
+
+
 public class Application {
     public static void main(String[] args) throws IOException, FontFormatException {
-        Menu menu = new Menu();
-        menu.run();
+
+        URL resource = Application.class.getClassLoader().getResource("square.ttf");
+        File fontFile = new File("resources\\square.ttf");
+        Font font =  Font.createFont(Font.TRUETYPE_FONT, fontFile);
+
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        ge.registerFont(font);
+
+        TerminalSize tsize = new TerminalSize(70,35);
+        DefaultTerminalFactory factory = new DefaultTerminalFactory().setInitialTerminalSize(tsize);
+
+        Font loadedFont = font.deriveFont(Font.PLAIN, 10);
+        AWTTerminalFontConfiguration fontConfig = AWTTerminalFontConfiguration.newInstance(loadedFont);
+        factory.setTerminalEmulatorFontConfiguration(fontConfig);
+        factory.setForceAWTOverSwing(true);
+
+        Terminal terminal = factory.createTerminal();
+        ((AWTTerminalFrame)terminal).addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                e.getWindow().dispose();
+            }
+        });
+        Screen screen = new TerminalScreen(terminal);
+
+        Menu_View menu = new Menu_View(screen);
+        menu.draw();
     }
 }

@@ -1,3 +1,5 @@
+package View;
+
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.Symbols;
 import com.googlecode.lanterna.TerminalSize;
@@ -19,39 +21,21 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Scanner;
 
-public class Menu {
-    public Menu() throws IOException, FontFormatException {
-        URL resource = getClass().getClassLoader().getResource("square.ttf");
-        File fontFile = new File("resources\\square.ttf");
-        Font font =  Font.createFont(Font.TRUETYPE_FONT, fontFile);
+public class Menu_View extends AbstractView {
 
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        ge.registerFont(font);
+    private Levels_View level;
 
-        TerminalSize tsize = new TerminalSize(70,35);
-        DefaultTerminalFactory factory = new DefaultTerminalFactory().setInitialTerminalSize(tsize);
+    public Menu_View(Screen screen)throws IOException {
+        super(screen);
 
-        Font loadedFont = font.deriveFont(Font.PLAIN, 10);
-        AWTTerminalFontConfiguration fontConfig = AWTTerminalFontConfiguration.newInstance(loadedFont);
-        factory.setTerminalEmulatorFontConfiguration(fontConfig);
-        factory.setForceAWTOverSwing(true);
+        this.screen.setCursorPosition(null);   // we don't need a cursor
+        this.screen.startScreen();             // screens must be started
+        this.screen.doResizeIfNecessary();     // resize screen if necessary
 
-        Terminal terminal = factory.createTerminal();
-        ((AWTTerminalFrame)terminal).addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                e.getWindow().dispose();
-            }
-        });
-
-        screen = new TerminalScreen(terminal);
-        screen.setCursorPosition(null);   // we don't need a cursor
-        screen.startScreen();             // screens must be started
-        screen.doResizeIfNecessary();     // resize screen if necessary
-
+        this.level = new Levels_View(screen, this);
     }
 
-    public void draw(int pos) throws IOException{
+    private void blinkPosition(int pos) throws IOException {
         screen.clear();
         TextGraphics tg = screen.newTextGraphics();
         switch (pos) {
@@ -74,6 +58,70 @@ public class Menu {
             }
         }
         screen.refresh();
+    }
+
+
+    public void draw() {
+        try {
+            blinkPosition(1);
+            boolean keepRunning = true;
+            int pos = 1;
+            while(keepRunning) {
+                KeyStroke key = screen.readInput();
+
+                switch (key.getKeyType()) {
+                    case Escape:
+                        keepRunning = false;
+                        screen.close();
+                        System.out.println("Ended Game");
+                        break;
+                    case EOF:
+                        keepRunning = false;
+                        break;
+                    case ArrowDown:
+                        if (pos == 1) {
+                            blinkPosition(2);
+                            pos = 2;
+                            break;
+                        }
+                        else if (pos == 2) {
+                            blinkPosition(3);
+                            pos = 3;
+                            break;
+                        }
+                        break;
+                    case ArrowUp:
+                        if (pos == 2) {
+                            blinkPosition(1);
+                            pos = 1;
+                            break;
+                        }
+                        else if (pos == 3) {
+                            blinkPosition(2);
+                            pos = 2;
+                            break;
+                        }
+                        break;
+                    case Enter:
+                        if (pos == 1) {
+                            level.drawLevelMenu(pos);
+                            keepRunning = false;
+                            break;
+                        }
+                        else if (pos == 2) {
+                            readFile();
+                            break;
+                        }
+                        screen.close();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        catch (IOException | InterruptedException | FontFormatException e) {
+            e.printStackTrace();
+        }
     }
 
     public void readFile() throws IOException {
@@ -100,67 +148,4 @@ public class Menu {
         }
     }
 
-    public void run() {
-        try {
-            draw(1);
-            boolean keepRunning = true;
-            int pos = 1;
-            while(keepRunning) {
-                KeyStroke key = screen.readInput();
-
-                switch (key.getKeyType()) {
-                    case Escape:
-                        keepRunning = false;
-                        screen.close();
-                        System.out.println("Ended Game");
-                        break;
-                    case EOF:
-                        keepRunning = false;
-                        break;
-                    case ArrowDown:
-                        if (pos == 1) {
-                            draw(2);
-                            pos = 2;
-                            break;
-                        }
-                        else if (pos == 2) {
-                            draw(3);
-                            pos = 3;
-                            break;
-                        }
-                    case ArrowUp:
-                        if (pos == 2) {
-                            draw(1);
-                            pos = 1;
-                            break;
-                        }
-                        else if (pos == 3) {
-                            draw(2);
-                            pos = 2;
-                            break;
-                        }
-                    case Enter:
-                        if (pos == 1) {
-                            Levels levels = new Levels(screen);
-                            levels.drawLevelMenu(pos);
-                            keepRunning = false;
-                            break;
-                        }
-                        else if (pos == 2) {
-                            readFile();
-                            break;
-                        }
-                        else {
-                            screen.close();
-                            break;
-                        }
-                }
-            }
-        }
-        catch (IOException | InterruptedException | FontFormatException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private Screen screen;
 }

@@ -1,3 +1,7 @@
+package View;
+
+import Controller.Arena_Controller;
+import Model.Arena_Model;
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -7,9 +11,15 @@ import com.googlecode.lanterna.screen.Screen;
 import java.awt.*;
 import java.io.IOException;
 
-public class Levels {
-    public Levels(Screen screen) {
+public class Levels_View {
+    private Screen screen;
+    private View menu;
+    private int lvl;
+
+    public Levels_View(Screen screen, View menu) throws IOException {
         this.screen = screen;
+        this.menu = menu;
+        this.lvl = 1;
     }
 
     public void drawLevelMenu(int pos) throws IOException, InterruptedException, FontFormatException {
@@ -71,9 +81,7 @@ public class Levels {
                 case Character:
                     if (key.getCharacter() == ('b')) {
                         keepRunning = false;
-                        Menu menu = new Menu();
-                        screen.close();
-                        menu.run();
+                        menu.draw();
                         break;
                     }
                     else if (key.getCharacter() == ('c')) {
@@ -113,14 +121,11 @@ public class Levels {
                     }
                 case Enter:
                     keepRunning = false;
-                    arena = new Arena(70,35,lvl);
-                    Game game = new Game(screen);
-                    game.run();
+                    Arena_View arena = new Arena_View(screen, lvl, menu);
+                    arena.draw();
                     break;
             }
         }
     }
-    public static int lvl;
-    public static Arena arena;
-    private final Screen screen;
+
 }
