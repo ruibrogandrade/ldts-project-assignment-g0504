@@ -53,6 +53,117 @@ No que toca à implementação, temos três tipos de classes com o propósito de
   <b><i>Fig 1. Model, Controller and Viewer pattern design</i></b>
 </p>
 
+#### Consequências:
+- Um código bem organizado de acordo com o *Single Responsibility Principle*.
+- Facilidade em implementar novas features
+
+### Observadores e Ouvintes
+
+#### O Problema en Contexto:
+
+
+#### O Modelo (Pattern):
+
+
+
+#### Implementação:
+
+
+
+#### Consequências: 
+
+
+
+### Battlefield Builder
+
+#### O Problema en Contexto:
+
+
+#### O Modelo (Pattern):
+
+
+
+#### Implementação:
+
+
+
+#### Consequências: 
+
+
+
+### Different type of commands
+
+#### O Problema en Contexto:
+
+
+#### O Modelo (Pattern):
+
+
+
+#### Implementação:
+
+
+
+#### Consequências: 
+
+
+
+### GUI
+
+#### O Problema en Contexto:
+
+
+#### O Modelo (Pattern):
+
+
+
+#### Implementação:
+
+
+
+#### Consequências: 
+
+
+## Known Code Smells And Refactoring Suggestions
+#### **Large Class**
+Some classes (e.g. Game, Battlefield, Player) contain many fields and others (e.g. GUI interface) contain many methods. In both cases, we find it justifiable as the classes require these fields, in one hand the Game class is the main class of the program and it needs to store a considerable amount of data, on the other hand various methods are needed for the interface and it wouldn't make sense to split it into two separate ones (extract method).
+
+#### **Data Class**
+All model classes are Data Classes, as they contain only fields, and no behavior (dumb classes). This is caused by the **MVC** (Model-View-Controller) architectural pattern which holds the responsibility to the controller to implement the logic functionalities of each model.
+This is not a bad code smell because it only exits due to the chosen design pattern.
+
+#### **Alternative classes with different interfaces and Lazy Classes**
+When we conceived the project ideas, we aspired various enemy types with different behaviours. However, with the project development, we decided to generalize our **Enemy Class** and differenciate, the divergent characteristics, from contrasting enemies based on their fields. As this classes only differ in the values passed to the **Enemy Class** constructor and have no other significant functions they are an example of **Alternative Classes with different interfaces and Lazy Classes**.
+
+#### **Refused bequest**
+In an attempt to generalize and simplify our code, various abstract classes and interfaces were created. Nevertheless this resulted in the rising of the **Refused bequest** smell. As a result, some subclasses inherited methods from its parent classes which are neither defined nor used. For example, the [**SwapCommand Class**](../src/main/java/com/g57/model/item/command/SwapCommand.java#L31).
+
+#### **Feature envy and message chains**
+As the result of the **MVC** (Model-View-Controller) pattern some of the controllers use is narrowed to its model method calls. Our controller envies its model.
+Also, in order to access a certain model's parameter it is mandatory to start by making a request to its controller.
+
+## Testing
+
+### Screenshot of coverage report
+<p align="center" justify="center">
+  <img src="images/screenshots/codeCoverage"/>
+</p>
+<p align="center">
+  <b><i>Fig 6. Code coverage screenshot</i></b>
+</p>
+
+### Link to mutation testing report
+[Mutation tests](../build/reports/pitest/202105302045/index.html)
+
+## Self-evaluation
+
+The work was divided in a mutual way and we all contributed with our best. It helped us to enrich our java and principle/pattern knwoledge, as well as our team work.
+
+- Donal Knuth: 33.3%
+- Timothy J. Berners-Lee: 33.3%
+- Vinton G. Cerf: 33.3%
+
+
 ## 3. Game States
 
 O Island Defense começa com o mapa ocupado por uma ilha e por um barco inimigo. Na ilha encontra-se o jogador cujo objetivo é não deixar os barcos chegarem à ilha.
