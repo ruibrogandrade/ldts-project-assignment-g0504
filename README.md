@@ -44,7 +44,7 @@ Este projeto foi desenvolvido por *Guilherme Valler Moreira* (up202007036@fe.up.
 
 
 #### Implementação: 
-No que toca à implementação, temos três tipos de classes com o propósito de guardar informação, controlar a lógica do jogo e organizar os efeitos visuais do jogo no ecrã, que são, respetivamente, as classes model, controllers e viewers. Estas classesmvc estão interligadas entre si da seguinte maneira: 
+No que toca à implementação, temos três tipos de classes com o propósito de guardar informação, controlar a lógica do jogo e organizar os efeitos visuais do jogo no ecrã, que são, respetivamente, as classes model, controllers e viewers. Estas classes mvc estão interligadas entre si da seguinte maneira: 
 
 <p align="center" justify="center">
   <img src="imagens/mvc.png"/>
@@ -56,6 +56,18 @@ No que toca à implementação, temos três tipos de classes com o propósito de
 #### Consequências:
 - Um código bem organizado de acordo com o *Single Responsibility Principle*.
 - Facilidade em implementar novas features
+
+#### Model
+
+Neste package estão as classes responsáveis por guardar os estados dos objetos e os métodos get e set para podermos controlar através do controller os estados de jogo. Assim, a informação contida nas classes não é estática, estando em constante mudança dependendo dos inputs do jogador. O código usado para criar os níveis também se encontra no package Model por ser informação relativamente a cada nível individual. A classe ArenaFactory é esta classe de criação dos níveis onde se cria e adiciona a uma lista de barcos, ilhas e borders, os barcos, ilhas e borders a ter em cada nível. Depois os níveis são criados, chamando estes métodos de crriação respetivos e referentes a cada nível.
+
+#### Controller
+
+A única classe responsável pelos controladores do jogo é a Arena_Controller. Esta classe funciona como controladora do jogo, fazendo verificações necessárias para estar de acordo com a lógica de jogo. Métodos como ShipHitsIsle para verificar as condições de final de jogo. Por uma questão de eventualmente mais classes poderem ser adicionadas neste package, criamos uma classe abstrata Controller que inicializa um model para poder ser passado as classes do tipo Controller sem ser necessário inicializar em todas.
+
+#### View
+
+Esta package é responsável pelo desenho de menus e do jogo em si. A decisão foi de criar uma interface que implementa um draw() para nos obrigar a que todas as classes que serão uma implementação desta interface terem um método draw do mesmo tipo e que se desenhem a elas próprias. De segyuda, como em todas as classes estavam a inicializar um screen, foi decidido também adicionar uma classe abstrata AbstractView, que faz essa inicialização e todas as classes que são um extend desta não necessitam então de ter repetida a instanciação do screen. Assim, todas as classes são um extend da AbstractView que implementa View, todas as classes de senham a elas próprias a partir do método draw() e na Arena_View são todos chamadas a partir dum getAllViews para poderem ser desenhadas serialmente. Para além disso, temos uma máquina de estados a verificar as seleções de opções no menu e de níveis no menu de níveis.
 
 ### Observadores e Ouvintes
 
