@@ -50,14 +50,11 @@ Neste projeto implementamos um design principal, o Modelo Arquitectural (Archite
 
 #### Implementação: 
 
-No que toca à implementação, temos três tipos de classes com o propósito de guardar informação, controlar a lógica do jogo e organizar os efeitos visuais do jogo no ecrã, que são, respetivamente, as classes model, controllers e viewers. Estas classes mvc estão interligadas entre si da seguinte maneira: 
+No que toca à implementação, temos três tipos de classes com o propósito de guardar informação, controlar a lógica do jogo e organizar os efeitos visuais do jogo no ecrã, que são, respetivamente, as classes model, controllers e viewers. Estas classes mvc estão interligadas entre si da seguinte maneira:
 
-<p align="center" justify="center">
-  <img src="imagens/mvc.png"/>
-</p>
-<p align="center">
-  <b><i>Fig 1. Modelo MVC (Model, Controller e Viewer)</i></b>
-</p>
+
+![mvc asfas](https://user-images.githubusercontent.com/39671616/151698977-6c92e62b-f27c-4efe-b8dd-300206b85955.png)
+
 
 #### Consequências:
 - Um código bem organizado de acordo com o *Single Responsibility Principle*.
@@ -117,12 +114,8 @@ O modelo que pensamos foi o *Factory Method* que, resumindo, providencia-nos uma
 
 A factory é responável for construir as bases, mas os "trabalhadores" é que realmente executam o trabalho. Neste caso, a ArenaModelFactory é a nossa factory e as subclasses são os trabalhadores. No que toca à implementação, a função AbstractView é uma função abstrata que sabe construir o nível, no entanto, só as suas subclasses é que têm os conteúdos necessários para o construir. O Arena_view, por exemplo, é uma das subclasses que consiste em decidir que nível vai ser criado de acordo com alguns inputs fornecidos pelo utilizador.
 
-<p align="center" justify="center">
-  <img src="imagens/LevelLoader.png"/>
-</p>
-<p align="center">
-  <b><i>Fig 2. Criador de Níveis</i></b>
-</p>
+![LevelLoader](https://user-images.githubusercontent.com/39671616/151698987-ef523b07-fba4-4eb1-9d07-3378950d1839.png)
+
 
 As classes podem ser encontradas nos seguintes ficheiros:
 
