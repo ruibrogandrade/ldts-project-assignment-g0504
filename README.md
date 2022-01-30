@@ -20,8 +20,6 @@ Este projeto foi desenvolvido por *Guilherme Valler Moreira* (up202007036@fe.up.
 
 ### 1.2 Features a Implementar
 
-- **Níveis de dificuldade** - Os níveis de dificuldade apresentados como fácil, médio ou difícil têm a ver com os tamanhos dos barcos que vão aparecendo no mapa, que aumentam quanto maior for o nível de dificuldade, e com o tamanho da ilha, que aumenta também com o aumento do nível de dificuldade.
-
 - **Power-ups** - Quando o jogador mira e manda um tiro num quadrado onde está um power-up, é acionado o power-up. Estes podem ser de diversos tipos, tiros mais poderosos ou ganhar tempo fazendo com que os barcos não se mexam durante alguns turnos.
 
 - **Modo infinito** - O modo infinito partilha as regras do modo normal, mas só acaba quando o jogador perder e vai aumento a dificuldade gradualmente.
@@ -46,6 +44,9 @@ O nosso primeiro problema foi a decisaão entre algumas estruturas possíveis. V
 
 Neste projeto implementamos um design principal, o Modelo Arquitectural (Architectural Pattern), mais especificamente o MVC (Model-View-Controller) que é normalmente usado em GUI.
 
+![](https://i.imgur.com/gA8eK9W.png)
+
+
 #### Implementação: 
 
 No que toca à implementação, temos três tipos de classes com o propósito de guardar informação, controlar a lógica do jogo e organizar os efeitos visuais do jogo no ecrã, que são, respetivamente, as classes model, controllers e viewers. Estas classes mvc estão interligadas entre si da seguinte maneira: 
@@ -54,99 +55,82 @@ No que toca à implementação, temos três tipos de classes com o propósito de
   <img src="imagens/mvc.png"/>
 </p>
 <p align="center">
-  <b><i>Fig 1. Model, Controller and Viewer pattern design</i></b>
+  <b><i>Fig 1. Modelo MVC (Model, Controller e Viewer)</i></b>
 </p>
 
 #### Consequências:
 - Um código bem organizado de acordo com o *Single Responsibility Principle*.
 - Facilidade em implementar novas features
 
-#### Model
+### **Model**
 
-Neste package estão as classes responsáveis por guardar os estados dos objetos e os métodos get e set para podermos controlar através do controller os estados de jogo. Assim, a informação contida nas classes não é estática, estando em constante mudança dependendo dos inputs do jogador. O código usado para criar os níveis também se encontra no package Model por ser informação relativamente a cada nível individual. A classe ArenaFactory é esta classe de criação dos níveis onde se cria e adiciona a uma lista de barcos, ilhas e borders, os barcos, ilhas e borders a ter em cada nível. Depois os níveis são criados, chamando estes métodos de crriação respetivos e referentes a cada nível.
+Neste package estão as classes responsáveis por guardar os estados dos objetos e os métodos get e set para podermos controlar através do controller os estados de jogo. Assim, a informação contida nas classes não é estática, estando em constante mudança dependendo dos inputs do jogador. O código usado para criar os níveis também se encontra no package Model por ser informação relativamente a cada nível individual. A classe ArenaModelFactory é esta classe de criação dos níveis onde se cria e adiciona a uma lista de barcos, ilhas e borders, os barcos, ilhas e borders a ter em cada nível. Depois os níveis são criados, chamando estes métodos de crriação respetivos e referentes a cada nível.
 
-#### Controller
+![](https://i.imgur.com/aR4hu3F.png)
+
+
+### **Controller**
 
 A única classe responsável pelos controladores do jogo é a Arena_Controller. Esta classe funciona como controladora do jogo, fazendo verificações necessárias para estar de acordo com a lógica de jogo. Métodos como ShipHitsIsle para verificar as condições de final de jogo. Por uma questão de eventualmente mais classes poderem ser adicionadas neste package, criamos uma classe abstrata Controller que inicializa um model para poder ser passado as classes do tipo Controller sem ser necessário inicializar em todas.
 
-#### View
+### **View**
 
 Esta package é responsável pelo desenho de menus e do jogo em si. A decisão foi de criar uma interface que implementa um draw() para nos obrigar a que todas as classes que serão uma implementação desta interface terem um método draw do mesmo tipo e que se desenhem a elas próprias. De seguida, como todas as classes estavam a inicializar um screen, foi decidido também adicionar uma classe abstrata AbstractView, que faz essa inicialização e todas as classes que são um extend desta não necessitam então de ter repetida a instanciação do screen. Assim, todas as classes são um extend da AbstractView que implementa View, todas as classes desenham-se a elas próprias a partir do método draw() e na Arena_View são todos chamadas a partir dum getAllViews para poderem ser desenhadas em série. Para além disso, temos uma máquina de estados a verificar as seleções de opções no menu e de níveis no menu de níveis.
 
-### Observadores e Ouvintes
+### **Criador de Níveis**
 
-#### O Problema en Contexto:
+#### O Problema em Contexto:
 
-
-#### O Modelo (Pattern):
-
-
-
-#### Implementação:
-
-
-
-#### Consequências: 
-
-
-
-### Battlefield Builder
-
-#### O Problema en Contexto:
-
+Como temos vários níveis, para que os níveis não sejam todos iguais, tivemos de manualmente criar todos os níveis ao inserir a ilha, barcos e borders. Tínhamos de arranjar uma maneira do o fazer de forma mais automatizada, seguindo algum método que nos ajudasse a fazê-lo.
 
 #### O Modelo (Pattern):
 
-
-
-#### Implementação:
-
-
-
-#### Consequências: 
-
-
-
-### Different type of commands
-
-#### O Problema en Contexto:
-
-
-#### O Modelo (Pattern):
-
-
+O modelo que pensamos foi o *Factory Method* que, resumindo, providencia-nos uma interface para inserir objeto para dentro de uma superclasse, mas permite que subclasses alterem o tipo de objeto que será criado.
 
 #### Implementação:
 
+A factory é responável for construir as bases, mas os "trabalhadores" é que realmente executam o trabalho. Neste caso, a ArenaModelFactory é a nossa factory e as subclasses são os trabalhadores. No que toca à implementação, a função AbstractView é uma função abstrata que sabe construir o nível, no entanto, só as suas subclasses é que têm os conteúdos necessários para o construir. O Arena_view, por exemplo, é uma das subclasses que consiste em decidir que nível vai ser criado de acordo com alguns inputs fornecidos pelo utilizador.
 
+<p align="center" justify="center">
+  <img src="imagens/LevelLoader"/>
+</p>
+<p align="center">
+  <b><i>Fig 2. Criador de Níveis</i></b>
+</p>
 
-#### Consequências: 
+As classes podem ser encontradas nos seguintes ficheiros:
 
-
-
-### GUI
-
-#### O Problema en Contexto:
-
-
-#### O Modelo (Pattern):
-
-
-
-#### Implementação:
-
-
+[ArenaModelFactory](../src/main/java/Model/ArenaModelFactory.java)
+[AbstractView](../src/main/java/View/AbstractView.java)
+[Arena_View](../src/main/java/View/Arena_View.java)
 
 #### Consequências: 
 
+- Conseguimos criar objetos passo-a-passo e correr passos recursivamente.
+- Código mais fácil de ler e perceber, estando tudo agrupado na mesma classe.
+- Remove a necessidade de implementar classes especificamete para a aplicação.
 
 ## Known Code Smells And Refactoring Suggestions
+
 #### **Large Class**
-Some classes (e.g. Game, Battlefield, Player) contain many fields and others (e.g. GUI interface) contain many methods. In both cases, we find it justifiable as the classes require these fields, in one hand the Game class is the main class of the program and it needs to store a considerable amount of data, on the other hand various methods are needed for the interface and it wouldn't make sense to split it into two separate ones (extract method).
+A Classe Arena_Controller usa muitos métodos sendo que a maior parte deles são usados para o comportamento dos navios. Nós tomamos esta decisão de modo a facilitar a implementação a short-term sendo que no futuro será mais confuso modificar estes métodos e classes. Uma maneira de resolver este Code Smells seria relocalizar os métodos nas respetivas classes nomeadamente todos os métodos relativos ao Ship no Ship_Controller e o process_key no hitmarker(move method?).
+
+
+#### **Switch Statements**
+Na Classe Levels_View pode-se encontrar um switch case complexo no método Choose_Level. O nível de complexidade é causado pelo facto de a possibilidade do utilizador meter várias inputs diferentes. A única maneira de resolver isto seria reduzior o número de níveis e dar split do Case Character para outro método (extract method?).
+
+
+#### **Alternative classes with different interfaces e Duplicate Code**
+Nas classes Player, Isle, Hitmarker, Border e Ships nós usamos as variáveis x e y para indicar a posição dos respetivos objetos. Para simplificar e prevenir código duplicado podiamos ter criado uma superclass Position e implementá-la nas classes referidas anteriormente (extract superclass).
+
+#### **Dead Code e Speculative Generality**
+Na class Levels_View existe uma variável pos que nunca é usada e nas classes
+
 
 #### **Data Class**
 All model classes are Data Classes, as they contain only fields, and no behavior (dumb classes). This is caused by the **MVC** (Model-View-Controller) architectural pattern which holds the responsibility to the controller to implement the logic functionalities of each model.
 This is not a bad code smell because it only exits due to the chosen design pattern.
+
 
 #### **Alternative classes with different interfaces and Lazy Classes**
 When we conceived the project ideas, we aspired various enemy types with different behaviours. However, with the project development, we decided to generalize our **Enemy Class** and differenciate, the divergent characteristics, from contrasting enemies based on their fields. As this classes only differ in the values passed to the **Enemy Class** constructor and have no other significant functions they are an example of **Alternative Classes with different interfaces and Lazy Classes**.
@@ -175,9 +159,9 @@ Also, in order to access a certain model's parameter it is mandatory to start by
 
 The work was divided in a mutual way and we all contributed with our best. It helped us to enrich our java and principle/pattern knwoledge, as well as our team work.
 
-- Donal Knuth: 33.3%
-- Timothy J. Berners-Lee: 33.3%
-- Vinton G. Cerf: 33.3%
+- Guilherme Moreira: 33.3%
+- Manel Moreira: 33.3%
+- Rui Andrade: 33.3%
 
 
 ## 3. Game States
