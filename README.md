@@ -92,7 +92,7 @@ O modelo que pensamos foi o *Factory Method* que, resumindo, providencia-nos uma
 A factory é responável for construir as bases, mas os "trabalhadores" é que realmente executam o trabalho. Neste caso, a ArenaModelFactory é a nossa factory e as subclasses são os trabalhadores. No que toca à implementação, a função AbstractView é uma função abstrata que sabe construir o nível, no entanto, só as suas subclasses é que têm os conteúdos necessários para o construir. O Arena_view, por exemplo, é uma das subclasses que consiste em decidir que nível vai ser criado de acordo com alguns inputs fornecidos pelo utilizador.
 
 <p align="center" justify="center">
-  <img src="imagens/LevelLoader"/>
+  <img src="imagens/LevelLoader.png"/>
 </p>
 <p align="center">
   <b><i>Fig 2. Criador de Níveis</i></b>
