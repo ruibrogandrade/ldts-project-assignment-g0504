@@ -24,10 +24,15 @@ public class Arena_Model{
         this.borders = borders;
         this.isles = isles;
         this.ships = ships;
-        
+
         int[] islesCenter = findIslesCenter();
         this.player = new Player_Model(islesCenter[0], islesCenter[1]);
         this.hitmarker = new Hitmarker_Model(width / 2, height / 2);
+    }
+
+    public Arena_Model(int width, int height){
+        this.width = width;
+        this.height = height;
     }
 
 
@@ -84,7 +89,7 @@ public class Arena_Model{
         }
         return new int[]{x1,y1,x2,y2};
     }
-    
+
     private int[] findIslesCenter() {
         int[] corners = findCorners();
         float x = (corners[0] + (((float)corners[2] - corners[0]) / 2));

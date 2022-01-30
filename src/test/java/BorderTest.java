@@ -1,4 +1,6 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import Model.Border_Model;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -9,10 +11,9 @@ public class BorderTest {
 
     @Test
     public void border_getters() {
-        Border border = new Border(2,3);
+        Border_Model border = new Border_Model(2,3);
         assertEquals(2, border.getX());
         assertEquals(3,border.getY());
     }
-
 
 }
