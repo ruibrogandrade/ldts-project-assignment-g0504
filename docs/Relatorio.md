@@ -83,8 +83,9 @@ A única classe responsável pelos controladores do jogo é a Arena_Controller. 
 
 Esta package é responsável pelo desenho de menus e do jogo em si. A decisão foi de criar uma interface que implementa um draw() para nos obrigar a que todas as classes que serão uma implementação desta interface terem um método draw do mesmo tipo e que se desenhem a elas próprias.
 
-![](https://i.imgur.com/8IhohnB.png)
-
+<p align="center" justify="center">
+  <img src="https://i.imgur.com/8IhohnB.png"/>
+</p>
 
 De seguida, como todas as classes estavam a inicializar um screen, foi decidido também adicionar uma classe abstrata AbstractView, que faz essa inicialização e todas as classes que são um extend desta não necessitam então de ter repetida a instanciação do screen.
 
@@ -94,8 +95,9 @@ De seguida, como todas as classes estavam a inicializar um screen, foi decidido 
 
 Assim, todas as classes são um extend da AbstractView que implementa View, todas as classes desenham-se a elas próprias a partir do método draw() e na Arena_View são todos chamadas a partir dum getAllViews para poderem ser desenhadas em série.
 
-![](https://i.imgur.com/wsbFrgL.png)
-
+<p align="center" justify="center">
+  <img src="https://i.imgur.com/wsbFrgL.png"/>
+</p>
 
 Para além disso, temos uma máquina de estados a verificar as seleções de opções no menu e de níveis no menu de níveis.
 
@@ -176,18 +178,15 @@ Devido ao **MVC** (Model-View-Controller) o Arena_Controller tem "inveja" dos mo
 
 ### Screenshot of coverage report
 <p align="center" justify="center">
-  <img src="images/screenshots/codeCoverage"/>
+  <img src="imagens/Tests.png"/>
 </p>
 <p align="center">
-  <b><i>Fig 6. Code coverage screenshot</i></b>
+  <b><i>Fig 3. Screenshot de Code coverage</i></b>
 </p>
-
-### Link to mutation testing report
-[Mutation tests](../build/reports/pitest/202105302045/index.html)
 
 ## 6. Self-evaluation
 
-The work was divided in a mutual way and we all contributed with our best. It helped us to enrich our java and principle/pattern knwoledge, as well as our team work.
+Cada um ajudou no que sabia melhor e acabamos por dividir o trabalho de forma mútua. Ajudou-nos a aprofundar o nosso conhecimento em jana e em métodos de estrutura de codigo.
 
 - Guilherme Moreira: 33.3%
 - Manel Moreira: 33.3%
