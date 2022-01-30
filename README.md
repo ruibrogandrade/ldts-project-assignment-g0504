@@ -187,13 +187,8 @@ Devido ao **MVC** (Model-View-Controller) o Arena_Controller tem "inveja" dos mo
 
 ## 6. Self-evaluation
 
-The work was divided in a mutual way and we all contributed with our best. It helped us to enrich our java and principle/pattern knwoledge, as well as our team work.
+Cada um ajudou no que sabia melhor e acabamos por dividir o trabalho de forma mútua. Ajudou-nos a aprofundar o nosso conhecimento em jana e em métodos de estrutura de codigo.
 
 - Guilherme Moreira: 33.3%
 - Manel Moreira: 33.3%
 - Rui Andrade: 33.3%
-
-
-
-
-
