@@ -178,7 +178,7 @@ Devido ao **MVC** (Model-View-Controller) o Arena_Controller tem "inveja" dos mo
 
 ### Screenshot of coverage report
 <p align="center" justify="center">
-  <img src="imagens/Tests.png"/>
+  <img src="https://imgur.com/a/E4yYCHQ"/>
 </p>
 <p align="center">
   <b><i>Fig 3. Screenshot de Code coverage</i></b>
