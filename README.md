@@ -44,8 +44,9 @@ O nosso primeiro problema foi a decisaão entre algumas estruturas possíveis. V
 
 Neste projeto implementamos um design principal, o Modelo Arquitectural (Architectural Pattern), mais especificamente o MVC (Model-View-Controller) que é normalmente usado em GUI.
 
-![](https://i.imgur.com/gA8eK9W.png)
-
+<p align="center" justify="center">
+  <img src="https://i.imgur.com/gA8eK9W.png"/>
+</p>
 
 #### Implementação: 
 
