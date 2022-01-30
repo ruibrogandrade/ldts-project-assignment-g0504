@@ -37,13 +37,17 @@ Este projeto foi desenvolvido por *Guilherme Valler Moreira* (up202007036@fe.up.
 ## 2. Design
 
 ### General Structure
+
 #### O Problema em Contexto:
 
+O nosso primeiro problema foi a decisaão entre algumas estruturas possíveis. Visto que estamos a utilizar um GUI e game states diferentes, tivemos de pensar num modelo (pattern) que satisfazesse as nossas necessidades.
 
 #### O Modelo (Pattern):
 
+Neste projeto implementamos um design principal, o Modelo Arquitectural (Architectural Pattern), mais especificamente o MVC (Model-View-Controller) que é normalmente usado em GUI.
 
 #### Implementação: 
+
 No que toca à implementação, temos três tipos de classes com o propósito de guardar informação, controlar a lógica do jogo e organizar os efeitos visuais do jogo no ecrã, que são, respetivamente, as classes model, controllers e viewers. Estas classes mvc estão interligadas entre si da seguinte maneira: 
 
 <p align="center" justify="center">
