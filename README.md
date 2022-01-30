@@ -73,35 +73,19 @@ A única classe responsável pelos controladores do jogo é a Arena_Controller. 
 
 Esta package é responsável pelo desenho de menus e do jogo em si. A decisão foi de criar uma interface que implementa um draw() para nos obrigar a que todas as classes que serão uma implementação desta interface terem um método draw do mesmo tipo e que se desenhem a elas próprias. De seguida, como todas as classes estavam a inicializar um screen, foi decidido também adicionar uma classe abstrata AbstractView, que faz essa inicialização e todas as classes que são um extend desta não necessitam então de ter repetida a instanciação do screen. Assim, todas as classes são um extend da AbstractView que implementa View, todas as classes desenham-se a elas próprias a partir do método draw() e na Arena_View são todos chamadas a partir dum getAllViews para poderem ser desenhadas em série. Para além disso, temos uma máquina de estados a verificar as seleções de opções no menu e de níveis no menu de níveis.
 
-### Observadores e Ouvintes
+### Criador de Níveis
 
-#### O Problema en Contexto:
+#### O Problema em Contexto:
 
-
-#### O Modelo (Pattern):
-
-
-
-#### Implementação:
-
-
-
-#### Consequências: 
-
-
-
-### Battlefield Builder
-
-#### O Problema en Contexto:
-
+Como temos vários níveis, para que os níveis não sejam todos iguais, tivemos de manualmente criar todos os níveis ao inserir a ilha, barcos e borders. Tínhamos de arranjar uma maneira do o fazer de forma mais automatizada, seguindo algum método que nos ajudasse a fazê-lo.
 
 #### O Modelo (Pattern):
 
-
+O modelo que pensamos foi o *Factory Method* que, resumindo, providencia-nos uma interface para inserir objeto para dentro de uma superclasse, mas permite que subclasses alterem o tipo de objeto que será criado.
 
 #### Implementação:
 
-
+A factory é responável for construir as bases, mas os "trabalhadores" é que realmente executam o trabalho. Neste caso, a ArenaModelFactory é a nossa factory e as subclasses são os trabalhadores.
 
 #### Consequências: 
 
