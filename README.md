@@ -83,8 +83,9 @@ A única classe responsável pelos controladores do jogo é a Arena_Controller. 
 
 Esta package é responsável pelo desenho de menus e do jogo em si. A decisão foi de criar uma interface que implementa um draw() para nos obrigar a que todas as classes que serão uma implementação desta interface terem um método draw do mesmo tipo e que se desenhem a elas próprias.
 
-![](https://i.imgur.com/8IhohnB.png)
-
+<p align="center" justify="center">
+  <img src="https://i.imgur.com/8IhohnB.png"/>
+</p>
 
 De seguida, como todas as classes estavam a inicializar um screen, foi decidido também adicionar uma classe abstrata AbstractView, que faz essa inicialização e todas as classes que são um extend desta não necessitam então de ter repetida a instanciação do screen.
 
