@@ -184,9 +184,6 @@ Devido ao **MVC** (Model-View-Controller) o Arena_Controller tem "inveja" dos mo
   <b><i>Fig 3. Screenshot de Code coverage</i></b>
 </p>
 
-### Link to mutation testing report
-[Mutation tests](../build/reports/pitest/202105302045/index.html)
-
 ## 6. Self-evaluation
 
 Cada um ajudou no que sabia melhor e acabamos por dividir o trabalho de forma mútua. Ajudou-nos a aprofundar o nosso conhecimento em jana e em métodos de estrutura de codigo.
